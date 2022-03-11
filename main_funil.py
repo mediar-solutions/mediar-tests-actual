@@ -1,10 +1,8 @@
-from email import message
 from time import sleep
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from datetime import datetime as dt
 import credentials
@@ -65,27 +63,20 @@ def check_funil():
             save_button.click()
             sleep(5)
 
-            #funil OUT
-            sleep(10)    
-            #funilElem = driver.find_element(by=By.ID, value='funil_value')
-            #funil_plataforma = round(float(funilElem.text[3:].replace(',', '')), 2)
-            ##funil_bigquery = round(funil_bq.loc[username], 2)
-            #print('funil Plataforma:', funil_plataforma)
-            #print('funil BigQuery:', funil_bigquery)
-            #if funil_plataforma == funil_bigquery:
-                print('funil ok')
-            else:
-                print('funil incorreto')
+def __init__(self, fluxoloja, driver):
 
-            if funil_plataforma > funil_bigquery: # if funil plataform is bigger than bigquery
-                print('funil da plataforma maior')
-            else:
-                print('funil da plataforma menor')
-        else:
-            print('login not completed')
-                
-    print('------------')
-    driver.close()
+    fluxoloja = driver.find_elements(by=By.XPATH, value='//*[@id="__next"]/div/div[4]/div[3]/div[1]/div/svg/g[3]/rect[4]')
+
+    self.fluxoloja = fluxoloja
+    self.fluxo_funil = pd.DataFrame()
+    #self.fluxo_funil_total_final = pd.DataFrame()
+    if fluxoloja < 100:
+        print(f'O fluxo da loja {fluxoloja} está abaixo do esperado')
+    else:
+        print(f'O fluxo da loja {fluxoloja} está acima do esperado')
+
+sys.stdout.close() #close print log
+    
 
 if __name__ == '__main__':
    check_funil()
@@ -94,9 +85,6 @@ elif __name__ == '__check_funil__':
    check_funil()
 else: 
     print('ERROR')
-sys.stdout.close() #close print log
-    
-
 
     
     
