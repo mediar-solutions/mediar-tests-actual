@@ -1,5 +1,4 @@
 from cgitb import text
-from email import message
 from time import sleep
 import pandas as pd
 from selenium import webdriver
@@ -21,7 +20,6 @@ import sys
 
 
 def check_funil():
-#todo: create function to funil
     
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     #driver.maximize_window()
