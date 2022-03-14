@@ -1,8 +1,10 @@
+from email import message
 from time import sleep
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from datetime import datetime as dt
 import credentials
@@ -63,20 +65,24 @@ def check_funil():
             save_button.click()
             sleep(5)
 
-def __init__(self, fluxoloja, driver):
+        #store flow variation
+        funil(driver)
+        funil = driver.find_elements(by=By.XPATH, value='//*[@id="__next"]/div/div[4]/div[3]/div[1]/div/svg/g[3]/rect[4]')
+        funil.check()
+        if funil == 100:
+            print('Funil está 100%')
+        else:
+            print('Funil não está 100%')
+            driver.quit()
 
-    fluxoloja = driver.find_elements(by=By.XPATH, value='//*[@id="__next"]/div/div[4]/div[3]/div[1]/div/svg/g[3]/rect[4]')
-
-    self.fluxoloja = fluxoloja
-    self.fluxo_funil = pd.DataFrame()
-    #self.fluxo_funil_total_final = pd.DataFrame()
-    if fluxoloja < 100:
-        print(f'O fluxo da loja {fluxoloja} está abaixo do esperado')
-    else:
-        print(f'O fluxo da loja {fluxoloja} está acima do esperado')
-
-sys.stdout.close() #close print log
-    
+        variation(driver)
+    variation = driver.find_element(by=By.ID, value='variation_0')
+    variation.check()
+    while variation in funil >= 50:
+        print('Funil está divergente')
+        sleep(10)    
+    print('------------')
+    driver.close()
 
 if __name__ == '__main__':
    check_funil()
@@ -85,6 +91,9 @@ elif __name__ == '__check_funil__':
    check_funil()
 else: 
     print('ERROR')
+sys.stdout.close() #close print log
+    
+
 
     
     
