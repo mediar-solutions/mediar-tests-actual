@@ -35,7 +35,7 @@ def check_funil():
         if logged:
             indicador = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[4]/div[2]/div[1]/div/div[1]')[0]
             indicador.click()
-            delay = 20 # seconds
+            delay = 15 # seconds
             try:
                 WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, 'funil_conversão'))) # wait until the element is loaded
                 print ("Page is ready!")
@@ -66,21 +66,10 @@ def check_funil():
             sleep(5)
 
         #store flow variation
-        funil(driver)
-        funil = driver.find_elements(by=By.XPATH, value='//*[@id="__next"]/div/div[4]/div[3]/div[1]/div/svg/g[3]/rect[4]')
-        funil.check()
-        if funil == 100:
-            print('Funil está 100%')
-        else:
-            print('Funil não está 100%')
-            driver.quit()
-
-        variation(driver)
     variation = driver.find_element(by=By.ID, value='variation_0')
-    variation.check()
-    while variation in funil >= 50:
-        print('Funil está divergente')
-        sleep(10)    
+    variation = variation.text
+    print(variation)
+    sleep(10)    
     print('------------')
     driver.close()
 
