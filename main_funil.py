@@ -1,3 +1,4 @@
+from cgitb import text
 from email import message
 from time import sleep
 import pandas as pd
@@ -53,25 +54,39 @@ def check_funil():
             selections_button.click()
             sleep(5)
 
-            #Button to close MS BASELINE
-            #buttons_x = driver.find_element(by=By.XPATH, value = '/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[2]/div[1]')
-            #button_x = buttons_x 
-            #button_x.click()
-            #sleep(5)
-
             #button SAVE
             save_buttons = driver.find_element(by=By.ID, value='save_params')
             save_button = save_buttons
             save_button.click()
             sleep(5)
 
-        #store flow variation
-    variation = driver.find_element(by=By.ID, value='variation_0')
-    variation = variation.text
-    print(variation)
-    sleep(10)    
-    print('------------')
-    driver.close()
+            #Store flow variation
+            store_variation = driver.find_element(by=By.ID, value='variation_0')
+            store_variation = store_variation.text
+            print(store_variation)
+            sleep(5)    
+            print('------------')
+            
+                #Category Flow Variation
+            category_variation = driver.find_element(by=By.ID, value='variation_1')
+            category_variation = category_variation.text
+            print(category_variation)
+            sleep(5)    
+            print('------------')
+
+                #Stopping Power Variation
+            stoppingp_variation = driver.find_element(by=By.ID, value='variation_2')
+            stoppingp_variation = stoppingp_variation.text
+            print(stoppingp_variation)
+            sleep(5)
+            print('------------')
+
+                #Conversion Variation
+            conversion_variation = driver.find_element(by=By.ID, value='variation_3')
+            conversion_variation = conversion_variation.text
+            print(conversion_variation)
+            sleep(5)
+            print('------------')
 
 if __name__ == '__main__':
    check_funil()
