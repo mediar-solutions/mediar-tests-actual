@@ -29,7 +29,7 @@ def login(driver, url, username, password):
     logged = False
         #Verify if the user is logged in with success or not
     error_elem = driver.find_elements(by=By.CLASS_NAME, value='Text-sc-13a1uj3-0 eiEtIk')
-    if len(error_elem) >= 0: # TODO: caso erro_elem for > 0 não for conhecido, print algo
+    if len(error_elem) >= 0: 
         if ("""Usuário ou senha não encontrados, verifique as informações inseridas e, caso persista, 
         utilize nossa recuperação de senha.""") in driver.page_source:
             print('LOGIN FAILED')
