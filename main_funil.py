@@ -15,7 +15,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 import sys
 
-#print log
+    #print log
 #sys.stdout = open("C:\\funil_login\\output.log", "a")
 
 
