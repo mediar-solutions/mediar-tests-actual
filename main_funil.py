@@ -41,7 +41,7 @@ def check_funil():
             except TimeoutException:
                 print ("Loading took too much time!")
              #Use active filters in the funil page
-            filters = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[4]/div[1]/div[3]')
+            filters = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[4]/div[1]/div[3]/div[2]')
             stores_filter = filters[0] 
             stores_filter.click()
             sleep(5)
@@ -49,9 +49,27 @@ def check_funil():
             #Button for select all stores
             selections = driver.find_element(by=By.ID, value='select_all')
             selections_button = selections
-            selections_button.click()
+            selections_button.click()           
             sleep(5)
 
+            #Select all subcategories
+            count = 0
+            subcategory_select = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[2]')
+            subcategory_input = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[1]/div[2]/div/input')
+            while True:
+                try:
+                    subcategory_select.click()
+                    subcategory_input.send_keys(Keys.ENTER)
+                    count_selected_options = len(driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[1]/*'))
+                    count += 1
+                    if count == count_selected_options:
+                        print('------------Deu bom-----------')
+                        break
+                except Exception as e:
+                    print('--------Quebrou mas ok--------')
+                    print(e)
+                    break
+                
             #button SAVE
             save_buttons = driver.find_element(by=By.ID, value='save_params')
             save_button = save_buttons
