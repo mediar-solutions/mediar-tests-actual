@@ -47,10 +47,18 @@ def check_funil():
             sleep(5)
 
             #Button for select all stores
-            selections = driver.find_element(by=By.ID, value='select_all')
-            selections_button = selections
-            selections_button.click()           
-            sleep(5)
+            while True:
+                try:
+                    selections = driver.find_element(by=By.ID, value='select_all')
+                    selections_button = selections
+                    selections_button.click()           
+                    sleep(5)
+                    if selections_button.is_displayed():
+                        break
+                except Exception as e:
+                    print('------deu ruim mas deu bom--------')
+                    print(e)
+                    break
 
             #Select all subcategories
             count = 0
