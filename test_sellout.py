@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Modify on tuesday Feb 22 12:12:46 2022
 
@@ -113,10 +112,10 @@ def check_sellout():
     driver.close()
 
 if __name__ == '__main__':
-   check_sellout()
-   print('DONE')
+    check_sellout()
+    print('DONE')
 elif __name__ == '__check_sellout__':
-   check_sellout()
+    check_sellout()
 else: 
     print('ERROR')
 sys.stdout.close() #close print log
