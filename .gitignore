@@ -1,2 +1,4 @@
 
 .gitattributes
+funil_conversao/credentials.cpython-310.pyc
+*.pyc
