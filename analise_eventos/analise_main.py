@@ -51,6 +51,7 @@ def check_eventos():
             selections = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[2]/div[2]/div/li[*]/input')
             for store in selections:
                 store.click()
+                sleep(0.5)
             
                 
             #Select all subcategories
@@ -70,11 +71,13 @@ def check_eventos():
             #         break
             subcategory_select.click()
             subcategory_input.send_keys(Keys.ENTER)
+            sleep(3)
                
 
             #datepciker start #todo impossivel de selecionar data
             baseline_start = driver.find_element(by=By.XPATH, value = '/html/body/div/div/div[1]/div/div[4]/div[2]/div[2]/div')
             baseline_start.click()
+            print('clicou')
             baseline_start.send_keys(Keys.ENTER)
             sleep(2)
             data_days = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[1]/div/div/div[2]/div[3]/div[2]/div/div/div/div[2]/div[2]/button[*]')
