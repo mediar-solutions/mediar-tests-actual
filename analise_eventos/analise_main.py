@@ -13,6 +13,7 @@ from login import login
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.action_chains import ActionChains
 import sys
 
     #print log
@@ -32,6 +33,7 @@ def check_eventos():
         logged = login(driver, url, username, password) 
         #acess the analysis of events
         if logged:
+            driver.refresh()
             indicador = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[4]/div[1]/div[2]/div[2]/p')[0]
             indicador.click()
             delay = 15 # seconds
@@ -55,7 +57,7 @@ def check_eventos():
             
                 
             #Select all subcategories
-            count = 0 #todo codigo nao termina o loop
+            #count = 0 #todo codigo nao termina o loop
             subcategory_select = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[2]')
             subcategory_input = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[1]/div[2]/div/input')
             # while True:
@@ -75,27 +77,22 @@ def check_eventos():
                
 
             #datepciker start #todo impossivel de selecionar data
-            baseline_start = driver.find_element(by=By.XPATH, value = '/html/body/div/div/div[1]/div/div[1]')
+            baseline_start = driver.find_element(by=By.ID, value = 'baseline_start')
             baseline_start.click()
             print('clicou')
-            #baseline_start.send_keys(Keys.ENTER)
             sleep(2)
-            #data_days = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[1]/div/div/div[2]/div[3]/div[2]/div/div/div/div[2]/div[2]/button[*]')
-            #data_days = [x for x in data_days if 'rdrDayPassive' not in x.get_property('class') and 'rdrDayDisabled' not in x.get_property('class')] #filter elements that are not active in calendar
-            #data_days[0].click()
-            #data_days[-1].click()
-            #sleep(2)
+            data_days = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[1]/div/div/div[2]/div[3]/div[2]/div/div/div/div[2]/div[2]/button[*]')
+            data_days = [x for x in data_days if 'rdrDayPassive' not in x.get_attribute('class') and 'rdrDayDisabled' not in x.get_attribute('class')] #filter elements that are not active in calendar
+            data_days[0].click()
+            data_days[-1].click()
+            elem = driver.find_element("/html/body/div/div/div[1]/div")
+            ac = ActionChains(driver)
+            ac.move_to_element(elem)
+            ac.move_by_offset(0,0)
+            ac.click()
+            ac.perform()
+            sleep(2)
 
-            #datepicker end
-           #baseline_end = driver.find_element(by=By.XPATH, value = '/html/body/div/div/div[1]/div/div[4]/div[2]/div[2]/div')
-           #baseline_end.click()
-           #sleep(2)
-           #data_days = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[1]/div/div/div[2]/div[3]/div[2]/div/div/div/div[2]/div[2]/button[*]')
-           #data_days = [x for x in data_days if 'rdrDayPassive' not in x.get_property('class') and 'rdrDayDisabled' not in x.get_property('class')] #filter elements that are not active in calendar
-           #data_days[0].click()
-           #data_days[-1].click()
-           #sleep(2)
- 
             #button SAVE
             save_buttons = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[6]/button')
             save_button = save_buttons
