@@ -85,13 +85,15 @@ def check_eventos():
             data_days = [x for x in data_days if 'rdrDayPassive' not in x.get_attribute('class') and 'rdrDayDisabled' not in x.get_attribute('class')] #filter elements that are not active in calendar
             data_days[0].click()
             data_days[-1].click()
-            elem = driver.find_elements(by=By.XPATH, value='/html/body')
+
+            #datepicker click outside
+            elem = driver.find_element(by=By.CLASS_NAME, value='EventContainer__ModalBG-sc-1p9oi42-11 eESkqn')
             ac = ActionChains(driver)
-            ac.move_to_element(elem)
-            ac.move_by_offset(0,0)
             ac.click()
             ac.perform()
             sleep(2)
+            
+            
 
             #button SAVE
             save_buttons = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[6]/button')
