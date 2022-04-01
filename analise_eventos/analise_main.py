@@ -85,7 +85,7 @@ def check_eventos():
             data_days = [x for x in data_days if 'rdrDayPassive' not in x.get_attribute('class') and 'rdrDayDisabled' not in x.get_attribute('class')] #filter elements that are not active in calendar
             data_days[0].click()
             data_days[-1].click()
-            elem = driver.find_element("/html/body/div/div/div[1]/div")
+            elem = driver.driver.find_element(by=By.ID, value='__next')
             ac = ActionChains(driver)
             ac.move_to_element(elem)
             ac.move_by_offset(0,0)
