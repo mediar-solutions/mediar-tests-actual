@@ -28,7 +28,7 @@ def check_eventos():
     
     logins = credentials.logins
     #Logging plataform
-    url = 'https://plataforma.mediarsolutions.com/'
+    url = 'https://previa.plataforma.mediarsolutions.com/home/overview/events'
     for username, password in logins.items():
         logged = login(driver, url, username, password) 
         #acess the analysis of events
@@ -87,11 +87,15 @@ def check_eventos():
             data_days[-1].click()
 
             #datepicker click outside
-            elem = driver.find_element(by=By.CLASS_NAME, value='EventContainer__ModalBG-sc-1p9oi42-11 eESkqn')
-            ac = ActionChains(driver)
-            ac.click()
-            ac.perform()
+            date_click = driver.find_element(by=By.ID, value='datepicker_close')
+            date_click.click()
             sleep(2)
+
+            #events information #todo create a fild to input some text
+            events = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[5]/div[2]/div[1]/input')
+            for event in events:
+                event.click()
+                sleep(0.5)
             
             
 
