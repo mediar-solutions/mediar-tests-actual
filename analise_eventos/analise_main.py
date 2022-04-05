@@ -1,5 +1,6 @@
 from cgitb import text
 from time import sleep
+from xml.dom.minidom import Element
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -92,10 +93,9 @@ def check_eventos():
             sleep(2)
 
             #events information #todo create a fild to input some text
-            events = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[5]/div[2]/div[1]/input')
-            for event in events:
-                event.click()
-                sleep(0.5)
+            element = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[5]/div[2]/div[1]/input')
+            element[0].send_keys("teste")
+
             
             
 
