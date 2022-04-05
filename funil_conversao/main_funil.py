@@ -34,18 +34,13 @@ def check_funil():
         if logged:
             indicador = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[4]/div[2]/div[1]/div/div[1]')[0]
             indicador.click()
-            delay = 15 # seconds
+            delay = 10 # seconds
             try:
                 WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, 'funil_conversão'))) # wait until the element is loaded
                 print ("Page is ready!")
             except TimeoutException:
                 print ("Loading took too much time!")
-             #Use active filters in the funil page
-            filters = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[4]/div[1]/div[3]/div[2]')
-            stores_filter = filters[0] 
-            stores_filter.click()
             sleep(5)
-
             #Button for select all stores
             while True:
                 try:
@@ -61,56 +56,67 @@ def check_funil():
                     break
 
             #Select all subcategories
-            count = 0
-            subcategory_select = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[2]')
-            subcategory_input = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[1]/div[2]/div/input')
-            while True:
-                try:
-                    subcategory_select.click()
-                    subcategory_input.send_keys(Keys.ENTER)
-                    count_selected_options = len(driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[1]/*'))
-                    count += 1
-                    if count == count_selected_options:
-                        print('------------Deu bom-----------')
-                        break
-                except Exception as e:
-                    print('--------Quebrou mas ok--------')
-                    print(e)
-                    break
+            limit = 9999
+            options = []
+            for i in range(0, limit):
+                #Use active filters in the funil page
+                filters = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[4]/div[1]/div[3]/div[2]')
+                stores_filter = filters[0] 
+                stores_filter.click()
+                sleep(3)
+                #subcategory selection
+                subcategory_select = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[2]')
+                subcategory_select.click()
+                sleep(2.8)
+                if i == 0:
+                    options = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[1]/*')
+                    limit = len(options)
+                options[i].click()
+                sleep(2.5)
+                #button SAVE 
+                save_buttons = driver.find_element(by=By.ID, value='save_params')
+                save_button = save_buttons
+                save_button.click()
+                #loading_icon = driver.find_element(by=By.XPATH, value = '/html/body/div/div/div[4]/div[3]/div/svg')
+                #while loading_icon.is_displayed():
+                sleep(5)
+                    
+                        
+
+
+
                 
-            #button SAVE
-            save_buttons = driver.find_element(by=By.ID, value='save_params')
-            save_button = save_buttons
-            save_button.click()
-            sleep(5)
+                
+            
+            
 
             #Store flow variation
-            store_variation = driver.find_element(by=By.ID, value='variation_0')
-            store_variation = store_variation.text
-            print(store_variation)
-            sleep(5)    
-            print('------------')
-            
-                #Category Flow Variation
-            category_variation = driver.find_element(by=By.ID, value='variation_1')
-            category_variation = category_variation.text
-            print(category_variation)
-            sleep(5)    
-            print('------------')
+                store_variation = driver.find_element(by=By.ID, value='variation_0')
+                store_variation = store_variation.text
+                print(store_variation)
+                sleep(5)    
+                print('------------')
+                
+                    #Category Flow Variation
+                category_variation = driver.find_element(by=By.ID, value='variation_1')
+                category_variation = category_variation.text
+                print(category_variation)
+                sleep(5)    
+                print('------------')
 
-                #Stopping Power Variation
-            stoppingp_variation = driver.find_element(by=By.ID, value='variation_2')
-            stoppingp_variation = stoppingp_variation.text
-            print(stoppingp_variation)
-            sleep(5)
-            print('------------')
+                    #Stopping Power Variation
+                stoppingp_variation = driver.find_element(by=By.ID, value='variation_2')
+                stoppingp_variation = stoppingp_variation.text
+                print(stoppingp_variation)
+                sleep(5)
+                print('------------')
 
-                #Conversion Variation
-            conversion_variation = driver.find_element(by=By.ID, value='variation_3')
-            conversion_variation = conversion_variation.text
-            print(conversion_variation)
-            sleep(5)
-            print('------------')
+                    #Conversion Variation
+                conversion_variation = driver.find_element(by=By.ID, value='variation_3')
+                conversion_variation = conversion_variation.text
+                print(conversion_variation)
+                sleep(5)
+                print('------------')
 
 if __name__ == '__main__':
    check_funil()
