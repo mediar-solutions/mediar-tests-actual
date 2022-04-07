@@ -1,5 +1,5 @@
 # mediar-tests-actual
-*funnel screen in creation
+*funnel screen in creation*
 
 <h3>we currently have:</h3>
 
