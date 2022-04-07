@@ -8,28 +8,29 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from datetime import datetime as dt
 import credentials
-from login import login
+from login import login 
 
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 import sys
 
-    #print log
+    #print log o (o log será printado num arquivo .txt em seu computador, para isso, mude o caminho de acordo com seu dispositivo)
 #sys.stdout = open("C:\\funil_login\\output.log", "a")
 
 
-def check_funil():
+def check_funil(): 
     
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install())) 
     #driver.maximize_window()
     driver.implicitly_wait(10)
     
-    logins = credentials.logins
+    logins = credentials.logins #get the credentials file
+
     #Logging plataform
     url = 'https://plataforma.mediarsolutions.com/'
-    for username, password in logins.items():
-        logged = login(driver, url, username, password) 
+    for username, password in logins.items(): #iterate through the logins
+        logged = login(driver, url, username, password) #call the login function
         #acess the funil page
         if logged:
             indicador = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[4]/div[2]/div[1]/div/div[1]')[0]
@@ -50,7 +51,7 @@ def check_funil():
                     sleep(5)
                     if selections_button.is_displayed():
                         break
-                except Exception as e:
+                except Exception as e: #if the element is not found, it will try again
                     print('------deu ruim mas deu bom--------')
                     print(e)
                     break
@@ -58,7 +59,7 @@ def check_funil():
             #Select all subcategories
             limit = 9999
             options = []
-            for i in range(0, limit):
+            for i in range(0, limit): #todo create a loop that cycles through the options
                 #Use active filters in the funil page
                 filters = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[4]/div[1]/div[3]/div[2]')
                 stores_filter = filters[0] 
@@ -80,17 +81,8 @@ def check_funil():
                 #loading_icon = driver.find_element(by=By.XPATH, value = '/html/body/div/div/div[4]/div[3]/div/svg')
                 #while loading_icon.is_displayed():
                 sleep(5)
-                    
-                        
 
-
-
-                
-                
-            
-            
-
-            #Store flow variation
+                #Store flow variation
                 store_variation = driver.find_element(by=By.ID, value='variation_0')
                 store_variation = store_variation.text
                 print(store_variation)
