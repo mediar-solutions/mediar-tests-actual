@@ -27,7 +27,7 @@ def check_eventos():
     #driver.maximize_window()
     driver.implicitly_wait(10)
     
-    logins = credentials.logins
+    logins = credentials.logins #inports the logins from credentials.py
     #Logging plataform
     url = 'https://previa.plataforma.mediarsolutions.com/home/overview/events'
     for username, password in logins.items():
