@@ -59,7 +59,7 @@ def check_eventos():
                 
             #Select all subcategories
             #count = 0 
-            subcategory_select = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[2]')
+            subcategory_select = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[2]')#todo cycle between subcategories
             subcategory_input = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[1]/div[2]/div/input')
             # while True:
             #     try:
@@ -71,13 +71,13 @@ def check_eventos():
             #             break
             #     except Exception as e:
             #         print(e)
-            #         break
+            #         break                                                #caso queira  seleciocar todas as subcategorias, apenas descomentar da linha 60 a 74
             subcategory_select.click()
             subcategory_input.send_keys(Keys.ENTER)
             sleep(3)
                
 
-            #datepciker start #todo impossivel de selecionar data
+            #datepciker start 
             baseline_start = driver.find_element(by=By.ID, value = 'baseline_start')
             baseline_start.click()
             print('clicou')
@@ -92,7 +92,7 @@ def check_eventos():
             date_click.click()
             sleep(2)
 
-            #events information #todo create a fild to input some text
+            #events information 
             element = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[5]/div[2]/div[1]/input')
             element[0].send_keys("teste")
 
