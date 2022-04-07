@@ -58,7 +58,7 @@ def check_eventos():
             
                 
             #Select all subcategories
-            #count = 0 #todo codigo nao termina o loop
+            #count = 0 
             subcategory_select = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[2]')
             subcategory_input = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[3]/div/div[3]/div/div/div/div[1]/div[2]/div/input')
             # while True:
@@ -96,14 +96,34 @@ def check_eventos():
             element = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[5]/div[2]/div[1]/input')
             element[0].send_keys("teste")
 
-            
-            
+            #tag filter
+            tag_filter = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[5]/div[2]/div[2]/div/div/div/div/div[2]')
+            tag_filter.click()
+            sleep(1)
+            select_tag_input = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[5]/div[2]/div[2]/div/div/div/div/div[1]/div[2]/div/input')
+            select_tag_input.send_keys(Keys.ENTER)
+            sleep(1)
+
+            #Event's Information data picker init
+            baseline_start = driver.find_element(by=By.ID, value = 'event_start')
+            baseline_start.click()
+            print('clicou')
+            sleep(2)
+            data_days = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[1]/div/div/div[2]/div[3]/div[2]/div/div/div/div[2]/div[2]/button[*]')
+            data_days = [x for x in data_days if 'rdrDayPassive' not in x.get_attribute('class') and 'rdrDayDisabled' not in x.get_attribute('class')] #filter elements that are not active in calendar
+            data_days[0].click()
+            data_days[-1].click()
+
+            #Event's Information data picker outside
+            date_click = driver.find_element(by=By.ID, value='datepicker_close')
+            date_click.click()
+            sleep(2)
 
             #button SAVE
             save_buttons = driver.find_element(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[6]/button')
             save_button = save_buttons
             save_button.click()
-            sleep(5)
+            sleep(50)
 
 if __name__ == '__main__':
    check_eventos()
