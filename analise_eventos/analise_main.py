@@ -84,8 +84,8 @@ def check_eventos():
             sleep(2)
             data_days = driver.find_elements(by=By.XPATH, value='/html/body/div/div/div[1]/div/div[1]/div/div/div[2]/div[3]/div[2]/div/div/div/div[2]/div[2]/button[*]')
             data_days = [x for x in data_days if 'rdrDayPassive' not in x.get_attribute('class') and 'rdrDayDisabled' not in x.get_attribute('class')] #filter elements that are not active in calendar
-            data_days[0].click()
-            data_days[-1].click()
+            data_days[0].click() #select the first day
+            data_days[-1].click() #select the last day
 
             #datepicker click outside
             date_click = driver.find_element(by=By.ID, value='datepicker_close')
