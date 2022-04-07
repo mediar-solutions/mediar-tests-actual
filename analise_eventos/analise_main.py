@@ -71,7 +71,7 @@ def check_eventos():
             #             break
             #     except Exception as e:
             #         print(e)
-            #         break                                                #caso queira seleciocar todas as subcategorias, apenas descomentar da linha 60 a 74
+            #         break                                               #caso queira seleciocar todas as subcategorias, apenas descomentar da linha 60 a 74
             subcategory_select.click()
             subcategory_input.send_keys(Keys.ENTER)
             sleep(3)
